@@ -1,0 +1,8 @@
+<div *ngIf="privateDataset">
+  <h1>
+    Private dataset retrieved:
+  </h1>
+  <p *ngFor="let data of privateDataset">
+    <span>First Name: <strong>{{data}}</strong> Lasn Name: <strong>{{data}}</strong></span>
+  </p>
+</div>
