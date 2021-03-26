@@ -1,8 +1,8 @@
-<div *ngIf="privateDataset">
+<div *ngIf="publicDataset">
   <h1>
-    Private dataset retrieved:
+    Public dataset retrieved:
   </h1>
-  <p *ngFor="let user of privateDataset">
+  <p *ngFor="let user of publicDataset">
     <span>First Name: <strong>{{user.firstName}}</strong> Lasn Name: <strong>{{user.lastName}}</strong></span>
   </p>
 </div>

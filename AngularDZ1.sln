@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularDZ1", "AngularDZ1\AngularDZ1.csproj", "{F3146BA8-189C-4D0B-9EA7-D43A5D115B00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularDZ1", "AngularDZ1\AngularDZ1.csproj", "{F3146BA8-189C-4D0B-9EA7-D43A5D115B00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{E940D759-B2B3-41CD-9047-6237BEE38DB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{D8EC955C-14BF-4E4E-8DE5-7F4EE6B17F57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{F3146BA8-189C-4D0B-9EA7-D43A5D115B00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3146BA8-189C-4D0B-9EA7-D43A5D115B00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3146BA8-189C-4D0B-9EA7-D43A5D115B00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E940D759-B2B3-41CD-9047-6237BEE38DB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E940D759-B2B3-41CD-9047-6237BEE38DB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E940D759-B2B3-41CD-9047-6237BEE38DB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E940D759-B2B3-41CD-9047-6237BEE38DB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8EC955C-14BF-4E4E-8DE5-7F4EE6B17F57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8EC955C-14BF-4E4E-8DE5-7F4EE6B17F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8EC955C-14BF-4E4E-8DE5-7F4EE6B17F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8EC955C-14BF-4E4E-8DE5-7F4EE6B17F57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

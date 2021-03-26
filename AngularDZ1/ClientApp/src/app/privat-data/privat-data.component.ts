@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { User } from './User';
 
 @Component({
   selector: 'app-privat-data',
@@ -7,9 +8,9 @@ import { Component, Inject, OnInit } from '@angular/core';
   styleUrls: ['./privat-data.component.css']
 })
 export class PrivatDataComponent implements OnInit {
-  public privateDataset: Array<string>;
+  public privateDataset: Array<User>;
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get <Array<string>>(baseUrl + 'privatdata').subscribe(
+    http.get <Array<User>>(baseUrl + 'privatdata/get-users').subscribe(
       result => { this.privateDataset = result; },
       error => { console.log("privatedate says: " + error); });
   }

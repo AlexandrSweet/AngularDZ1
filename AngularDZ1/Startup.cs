@@ -9,6 +9,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
+using BusinessLayer.UserService;
+using System.Linq;
+using DataAccessLayer.Entities;
+using BusinessLayer.DataServicePublic;
 
 namespace AngularDZ1
 {
@@ -24,6 +30,13 @@ namespace AngularDZ1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration["SqlServerConnectionString"], 
+                    b => b.MigrationsAssembly("DataAccessLayer"));
+            });
+
+            
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -40,6 +53,12 @@ namespace AngularDZ1
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@123"))
                 };
             });
+
+           
+            services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+            services.AddScoped<IPrivateDataService, PrivateDataService>();
+            services.AddScoped<IPublicDataService, PublicDataService>();
+
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -72,6 +91,8 @@ namespace AngularDZ1
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            SeedDefaultUsersPrivate(app);
+            SeedDefaultUsersPublic(app);
 
             app.UseEndpoints(endpoints =>
             {
@@ -92,6 +113,60 @@ namespace AngularDZ1
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+        }
+
+        private void SeedDefaultUsersPrivate(IApplicationBuilder app)
+        {
+            var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using (var scope = scopeFactory.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                if (dbContext.UserPrivate.FirstOrDefault(u => u.FirstName == "Denis") == null)
+                {
+                    UserPrivate Denis = new UserPrivate { FirstName = "Denis", LastName = "Popandopalo" };
+                    UserPrivate Denis2 = new UserPrivate { FirstName = "Denis2", LastName = "Popandopalo2" };
+                    UserPrivate Denis3 = new UserPrivate { FirstName = "Denis3", LastName = "Popandopalo3" };
+                    UserPrivate Denis4 = new UserPrivate { FirstName = "Denis4", LastName = "Popandopalo4" };
+                    UserPrivate Denis5 = new UserPrivate { FirstName = "Denis5", LastName = "Popandopalo5" };
+                    
+                    dbContext.UserPrivate.Add(Denis);
+                    dbContext.UserPrivate.Add(Denis2);
+                    dbContext.UserPrivate.Add(Denis3);
+                    dbContext.UserPrivate.Add(Denis4);
+                    dbContext.UserPrivate.Add(Denis5);
+
+                    dbContext.SaveChanges();
+
+                }
+
+            }
+        }
+
+        private void SeedDefaultUsersPublic(IApplicationBuilder app)
+        {
+            var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using (var scope = scopeFactory.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                if (dbContext.UserPublic.FirstOrDefault(u => u.FirstName == "PublicDenis") == null)
+                {
+                    UserPublic UsersPublicDenis =  new UserPublic { FirstName = "PublicDenis", LastName = "Popandopalo" };
+                    UserPublic UsersPublicDenis2 = new UserPublic { FirstName = "PublicDenis2", LastName = "Popandopalo2" };
+                    UserPublic UsersPublicDenis3 = new UserPublic { FirstName = "PublicDenis3", LastName = "Popandopalo3" };
+                    UserPublic UsersPublicDenis4 = new UserPublic { FirstName = "PublicDenis4", LastName = "Popandopalo4" };
+                    UserPublic UsersPublicDenis5 = new UserPublic { FirstName = "PublicDenis5", LastName = "Popandopalo5" };
+
+                    dbContext.UserPublic.Add(UsersPublicDenis);
+                    dbContext.UserPublic.Add(UsersPublicDenis2);
+                    dbContext.UserPublic.Add(UsersPublicDenis3);
+                    dbContext.UserPublic.Add(UsersPublicDenis4);
+                    dbContext.UserPublic.Add(UsersPublicDenis5);
+
+                    dbContext.SaveChanges();
+
+                }
+
+            }
         }
     }
 }
