@@ -29,7 +29,7 @@ namespace AngularDZ1.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route ("get-users")]
+        [Route ("get-private-users")]
         public List<User> GetAllUsers()
         {
             return _userService.GetPrivateData();

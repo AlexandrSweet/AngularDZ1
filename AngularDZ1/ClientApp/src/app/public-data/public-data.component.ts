@@ -10,9 +10,9 @@ import { User } from '../privat-data/User';
 export class PublicDataComponent implements OnInit {
   public publicDataset: Array<User>;
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Array<User>>(baseUrl + 'publicdata/get-publicUsers').subscribe(
+    http.get<Array<User>>(baseUrl + 'publicdata/get-public-users').subscribe(
       result => { this.publicDataset = result; },
-      error => { console.log("privatedate says: " + error); });
+      error => { console.log("publicdate says: " + error); });
   }
   ngOnInit() {
   }

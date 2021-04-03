@@ -10,7 +10,7 @@ import { User } from './User';
 export class PrivatDataComponent implements OnInit {
   public privateDataset: Array<User>;
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get <Array<User>>(baseUrl + 'privatdata/get-users').subscribe(
+    http.get <Array<User>>(baseUrl + 'privatdata/get-private-users').subscribe(
       result => { this.privateDataset = result; },
       error => { console.log("privatedate says: " + error); });
   }

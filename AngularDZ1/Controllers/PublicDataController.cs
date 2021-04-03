@@ -21,7 +21,7 @@ namespace AngularDZ1.Controllers
         }
         
         [HttpGet]        
-        [Route("get-publicUsers")]
+        [Route("get-public-users")]
         public List<User> GetAllPublicUsers()
         {
             return _userService.GetPublicData();
