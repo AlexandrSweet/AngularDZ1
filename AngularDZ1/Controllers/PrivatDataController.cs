@@ -20,12 +20,6 @@ namespace AngularDZ1.Controllers
         {
             _userService = userService;
         }
-        [HttpGet]
-        [Authorize]
-        public IEnumerable<String> Get()
-        {
-            return new string[] { "First", "Second" };
-        }
 
         [HttpGet]
         [Authorize]

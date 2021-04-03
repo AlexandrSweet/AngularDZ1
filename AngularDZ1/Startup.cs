@@ -15,6 +15,7 @@ using BusinessLayer.UserService;
 using System.Linq;
 using DataAccessLayer.Entities;
 using BusinessLayer.DataServicePublic;
+using BusinessLayer.Filters;
 
 namespace AngularDZ1
 {
@@ -30,12 +31,19 @@ namespace AngularDZ1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            // глобально - все сервисы MVC - и контроллеры, и Razor Page
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(MyFilter)); // подключение по типу
+
+            });            
+
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(Configuration["SqlServerConnectionString"], 
                     b => b.MigrationsAssembly("DataAccessLayer"));
             });
-
             
             services.AddAuthentication(opt =>
             {
@@ -53,11 +61,11 @@ namespace AngularDZ1
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@123"))
                 };
             });
-
-           
+                       
             services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
             services.AddScoped<IPrivateDataService, PrivateDataService>();
             services.AddScoped<IPublicDataService, PublicDataService>();
+            services.AddScoped<MyFilter>();            
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
