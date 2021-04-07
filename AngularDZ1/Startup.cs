@@ -30,13 +30,10 @@ namespace AngularDZ1
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-
-            // глобально - все сервисы MVC - и контроллеры, и Razor Page
+        {            
             services.AddMvc(options =>
             {
-                options.Filters.Add(typeof(MyFilter)); // подключение по типу
-
+                options.Filters.Add(typeof(MyFilter));
             });            
 
             services.AddDbContext<ApplicationDbContext>(options =>

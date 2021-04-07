@@ -14,19 +14,13 @@ namespace BusinessLayer.Filters
         }
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var request = filterContext.HttpContext.Request;
-
-            // не смог найти метод или свойство которое вернёт контроллер, костыль сделал
-            string[] words = (request.Path.ToString()).Split(new char[] { '/' });
-
             _dbContext.ApiRequestsLogs.Add(new ApiRequestsLogs()
             {
-                EndpointName = request.Path.ToString(),
-                ResourceName = words[1],
+                EndpointName = filterContext.RouteData.Values["Action"].ToString(),
+                ResourceName = filterContext.RouteData.Values["Controller"].ToString(),
                 RequestTime = DateTime.Now.ToString()          
 
-            });         
-
+            });       
 
             _dbContext.SaveChanges();
             base.OnActionExecuting(filterContext);
